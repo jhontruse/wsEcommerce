@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 // Clase S9 --
 @AllArgsConstructor
 public class LoginController {
-//Esto es un cambio
+//Esto es un cambio. 
     @Autowired
     private final AuthenticationManager authenticationManager;
 
