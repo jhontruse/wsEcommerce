@@ -45,7 +45,7 @@ public class UsuarioController {
         }
     }
 
-    @PreAuthorize("@authorizeLogic.hasAccess('createUsuario')")
+    //@PreAuthorize("@authorizeLogic.hasAccess('createUsuario')")
     @PostMapping("${usuario.controller.createUsuario}")
     public ResponseEntity<?> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         try {

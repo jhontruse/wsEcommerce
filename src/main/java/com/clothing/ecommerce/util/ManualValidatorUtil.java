@@ -13,7 +13,7 @@ public class ManualValidatorUtil {
 
         final Pattern VALIDATOR_USUARIO = Pattern.compile("^[a-zA-Z0-9]+$");
         final Pattern VALIDATOR_EMAIL = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-        final Pattern VALIDATOR_PASSWORD = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[^\\s]{5,}$");
+        final Pattern VALIDATOR_PASSWORD = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?])[^\\s]{5,}$");
         final Pattern VALIDATOR_ACTIVO = Pattern.compile("^(true|false)$");
 
         List<String> errors = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ManualValidatorUtil {
         }
 
         if (usuario.getPassword().length() < 5) {
-            errors.add("El password debe tener al menos 3 caracteres.");
+            errors.add("El password debe tener al menos 5 caracteres.");
         }
 
         if (!VALIDATOR_PASSWORD.matcher(usuario.getPassword()).matches()) {

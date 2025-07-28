@@ -58,7 +58,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(antMatcher("/login")).permitAll()
                         .requestMatchers(antMatcher("/mail/**")).permitAll()
-                        //.requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
+                        .requestMatchers(antMatcher("/usuario/create")).permitAll()
                         //.requestMatchers(antMatcher("/swagger-ui.html/**")).permitAll()
                         //.requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                         //.requestMatchers(antMatcher("/api-docs/**")).permitAll()   
