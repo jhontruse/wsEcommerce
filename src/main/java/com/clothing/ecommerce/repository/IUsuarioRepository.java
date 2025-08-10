@@ -24,4 +24,6 @@ public interface IUsuarioRepository {
 
     Map<String, Object> findAllUsuariosByPersonaId(UUID idUsuario);
 
+
+
 }

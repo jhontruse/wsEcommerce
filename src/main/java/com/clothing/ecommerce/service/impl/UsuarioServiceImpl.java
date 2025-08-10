@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -158,6 +159,24 @@ public class UsuarioServiceImpl implements IUsuarioService {
             throw new ServiceException("Error en la capa service", e);
         }
 
+    }
+
+    @Override
+    public Usuario findUsuariosByUsuario(String usuario) {
+        try {
+            Usuario existingUsuario = usuarioRepository.findUsuariosByUsuario(usuario);
+            if (existingUsuario == null) {
+                return null;
+            }
+            existingUsuario.setPassword(null);
+            return existingUsuario;
+        } catch (ServiceException e) {
+            throw new ServiceException("Error en la lógica de negocio", e);
+        } catch (AppException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServiceException("Error en la capa service", e);
+        }
     }
 
 }

@@ -6,7 +6,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,8 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
         try {
             String sql = " SELECT * FROM USUARIO WHERE USUARIO = ? ";
             return jdbcTemplate.queryForObject(sql, usuarioMapper, usuario);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
         } catch (DataAccessException ex) {
             throw new RepositoryException("Error al acceder a la base de datos", ex);
         } catch (AppException ex) {
@@ -84,7 +88,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
 
             Map<UUID, Map<String, Object>> agrupadoPorUsuario = new LinkedHashMap<>();
 
-            jdbcTemplate.query(sql, new Object[] { size, offset }, (rs) -> {
+            jdbcTemplate.query(sql, new Object[]{size, offset}, (rs) -> {
 
                 UUID idUsuario = UUID.fromString(rs.getString(1)); // id_usuario
 
@@ -156,7 +160,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
             Map<String, Object> result = new HashMap<>();
             List<Map<String, Object>> roles = new ArrayList<>();
 
-            jdbcTemplate.query(sql, new Object[] { idUsuario.toString() }, (rs) -> {
+            jdbcTemplate.query(sql, new Object[]{idUsuario.toString()}, (rs) -> {
 
                 if (result.isEmpty()) {
                     Map<String, Object> usuario = new HashMap<>();

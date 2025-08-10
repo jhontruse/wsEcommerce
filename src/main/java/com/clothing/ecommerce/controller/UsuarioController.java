@@ -3,6 +3,7 @@ package com.clothing.ecommerce.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -103,6 +104,19 @@ public class UsuarioController {
         try {
             Map<String, Object> list = usuarioService.findAllUsuariosByPersonaId(idUsuario);
             return ResponseEntity.ok(list);
+        } catch (AppException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ControllerException("Error en el controller", e);
+        }
+    }
+
+    //@PreAuthorize("@authorizeLogic.hasAccess('findUsuarioByUsu')")
+    @GetMapping("${usuario.controller.findUsuarioByUser}/{usuario}")
+    public ResponseEntity<Usuario> findUsuarioByUsuario(@PathVariable("usuario") String usuario) {
+        try {
+            Usuario usuarioRecibido = usuarioService.findUsuariosByUsuario(usuario);
+            return ResponseEntity.ok(usuarioRecibido);
         } catch (AppException e) {
             throw e;
         } catch (Exception e) {
