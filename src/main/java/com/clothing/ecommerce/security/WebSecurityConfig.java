@@ -60,6 +60,7 @@ public class WebSecurityConfig {
                         .requestMatchers(antMatcher("/mail/**")).permitAll()
                         .requestMatchers(antMatcher("/usuario/create")).permitAll()
                         .requestMatchers(antMatcher("/usuario/buscar/**")).permitAll()
+                        .requestMatchers(antMatcher("/persona/buscar/**")).permitAll()
                         //.requestMatchers(antMatcher("/swagger-ui.html/**")).permitAll()
                         //.requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                         //.requestMatchers(antMatcher("/api-docs/**")).permitAll()   
