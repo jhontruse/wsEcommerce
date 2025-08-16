@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import lombok.AllArgsConstructor;
+
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 //Clase S7
@@ -24,6 +25,12 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @EnableMethodSecurity
 @AllArgsConstructor
 public class WebSecurityConfig {
+
+    private static final String[] SWAGGER_WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui.html",
+            "/swagger-ui/**"
+    };
 
     @Autowired
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -61,6 +68,7 @@ public class WebSecurityConfig {
                         .requestMatchers(antMatcher("/usuario/create")).permitAll()
                         .requestMatchers(antMatcher("/usuario/buscar/**")).permitAll()
                         .requestMatchers(antMatcher("/persona/buscar/**")).permitAll()
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()   // Swagger UI público
                         //.requestMatchers(antMatcher("/swagger-ui.html/**")).permitAll()
                         //.requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                         //.requestMatchers(antMatcher("/api-docs/**")).permitAll()   
